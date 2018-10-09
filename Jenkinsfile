@@ -26,18 +26,18 @@ stages{
         stage ('Deployments'){
             parallel{
                 stage ('Deploy to Staging'){
-                    node {
-                        sshagent(['1e22f4b2-fe72-4408-b34b-1f9abe1e47b3']) {
-                            sh "scp **/target/*.war tomcat@${params.tomcat_dev}:/usr/local/tomcat/webapps"
-						}
+                    steps {
+				withCredentials([usernamePassword(credentialsId: '1e22f4b2-fe72-4408-b34b-1f9abe1e47b3', passwordVariable: 'tomcat', usernameVariable: 'tomcat')]) {
+    sh "scp **/target/*.war tomcat@${params.tomcat_dev}:/usr/local/tomcat/webapps"
+}
                     }
                 }
 
                 stage ("Deploy to Production"){
-			node {  
-  				sshagent(['1e22f4b2-fe72-4408-b34b-1f9abe1e47b3']) {
-    					sh "scp **/target/*.war tomcat@${params.tomcat_prod}:/usr/local/tomcat/webapps"
-  				}
+			steps {  
+				withCredentials([usernamePassword(credentialsId: '1e22f4b2-fe72-4408-b34b-1f9abe1e47b3', passwordVariable: 'tomcat', usernameVariable: 'tomcat')]) {
+    sh "scp **/target/*.war tomcat@${params.tomcat_prod}:/usr/local/tomcat/webapps"
+}
 			}
                 }
             }
