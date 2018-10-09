@@ -34,7 +34,7 @@ stages{
                 }
 
                 stage ("Deploy to Production"){
-			steps {  wrappers {
+			steps {  step {
   				sshagent(['1e22f4b2-fe72-4408-b34b-1f9abe1e47b3']) {
     					sh "scp **/target/*.war tomcat@${params.tomcat_prod}:/usr/local/tomcat/webapps"
   				}
