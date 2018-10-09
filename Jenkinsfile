@@ -26,7 +26,7 @@ stages{
         stage ('Deployments'){
             parallel{
                 stage ('Deploy to Staging'){
-                    steps {
+                    node {
                         sshagent(['1e22f4b2-fe72-4408-b34b-1f9abe1e47b3']) {
                             sh "scp **/target/*.war tomcat@${params.tomcat_dev}:/usr/local/tomcat/webapps"
 						}
@@ -34,11 +34,11 @@ stages{
                 }
 
                 stage ("Deploy to Production"){
-			steps {  step {
+			node {  
   				sshagent(['1e22f4b2-fe72-4408-b34b-1f9abe1e47b3']) {
     					sh "scp **/target/*.war tomcat@${params.tomcat_prod}:/usr/local/tomcat/webapps"
   				}
-			} }
+			}
                 }
             }
         }
