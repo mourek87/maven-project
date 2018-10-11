@@ -1,0 +1,6 @@
+./server/
+./webapp/target/maven-archiver/
+./webapp/target/surefire/
+./webapp/target/webapp/
+./webapp/src/
+./webapp/pom.xml
