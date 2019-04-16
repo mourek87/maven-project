@@ -7,6 +7,8 @@ pipeline {
          string(defaultValue: "", description: '', name: 'APP_VERSION')
     }
 
+    def version = env.APP_VERSION
+    
     triggers {
          pollSCM('* * * * *')
      }
@@ -14,7 +16,7 @@ pipeline {
 stages{
         stage('Build'){
             steps {
-                APP_VERSION = sh(script: "git describe --tags | cut -c 1-4", returnStdout: true)                
+                version = sh(script: "git describe --tags | cut -c 1-4", returnStdout: true).trim()            
                 sh 'echo ${version}'
             }
         }
