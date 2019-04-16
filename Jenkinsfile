@@ -14,8 +14,7 @@ pipeline {
 stages{
         stage('Build'){
             steps {
-                def version = sh returnStdout: true, script: 'git describe --tags | cut -c 1-4'
-                
+                APP_VERSION = sh(script: "git describe --tags | cut -c 1-4", returnStdout: true)                
                 sh 'echo ${version}'
             }
         }
