@@ -13,7 +13,7 @@ pipeline {
 stages{
         stage('Build'){
             steps {
-                sh 'git describe'
+                sh 'git describe --tags'
                 sh 'git describe --abbrev=0'
             }
             post {
