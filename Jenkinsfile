@@ -1,3 +1,4 @@
+def version = 'init'
 pipeline {
     agent any
 
@@ -10,23 +11,27 @@ pipeline {
          pollSCM('* * * * *')
      }
     
-    environment {
-            version = 'init'
-        }
-    
 stages{   
-    stage('Build'){
-            steps {
-                sh 'echo ${version}'
-                sh 'git describe --tags | cut -c 1-4'
-                script {
-                    version = sh(
-                    script: "git describe --tags | cut -c 1-4",
-                    returnStdout: true,
-                  ) 
-                }                       
-                sh 'echo ${version}'
-            }
+    stage('Parallel'){
+        parallel {
+            stage('Build'){
+                steps {
+					sh 'echo ${version}'
+					sh 'git describe --tags | cut -c 1-4'
+					script {
+						version = sh(
+						script: "git describe --tags | cut -c 1-4",
+						returnStdout: true,
+					  ) 
+					}                       
+					sh 'echo ${version}'
+				}
+			}
+            stage('Build 2'){
+                steps {
+					sh 'echo "Hello World"'
+				}
+			}
         }
     }
 }
