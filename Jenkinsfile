@@ -1,3 +1,5 @@
+version = 'init'
+
 pipeline {
     agent any
 
@@ -9,11 +11,9 @@ pipeline {
     triggers {
          pollSCM('* * * * *')
      }
-
-    def version
     
-stages{
-        stage('Build'){
+stages{   
+    stage('Build'){
             steps {
                 version = sh(
                     script: "git describe --tags | cut -c 1-4",
