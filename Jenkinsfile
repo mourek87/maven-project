@@ -18,6 +18,7 @@ stages{
     stage('Build'){
             steps {
                 sh 'echo ${version}'
+                sh 'git describe --tags | cut -c 1-4'
                 script {
                     version = sh(
                     script: "git describe --tags | cut -c 1-4",
