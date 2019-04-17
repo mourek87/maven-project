@@ -26,7 +26,26 @@ pipeline {
 						}                       
 						sh 'echo ${version}'
 					}
-				}            
+				}
+				stage('Echo'){
+					steps {
+						sh 'echo ${BUILD_NUMBER}'
+						sh 'echo ${BUILD_ID}'
+						sh 'echo ${BUILD_URL}'
+						sh 'echo ${NODE_NAME}'
+						sh 'echo ${JOB_NAME}'
+						sh 'echo ${BUILD_TAG}'
+						sh 'echo ${JENKINS_URL}'
+						sh 'echo ${EXECUTOR_NUMBER}'
+						sh 'echo ${JAVA_HOME}'
+						sh 'echo ${WORKSPACE}'
+						sh 'echo ${SVN_REVISION}'
+						sh 'echo ${CVS_BRANCH}'
+						sh 'echo ${GIT_COMMIT}'
+						sh 'echo ${GIT_URL}'
+						sh 'echo ${GIT_BRANCH}'
+					}
+				}
 			}
 		}
 	}
