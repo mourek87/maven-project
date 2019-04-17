@@ -1,5 +1,3 @@
-version = 'init'
-
 pipeline {
     agent any
 
@@ -11,6 +9,10 @@ pipeline {
     triggers {
          pollSCM('* * * * *')
      }
+    
+    environment {
+            version = 'init'
+        }
     
 stages{   
     stage('Build'){
