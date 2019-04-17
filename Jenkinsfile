@@ -17,10 +17,13 @@ pipeline {
 stages{   
     stage('Build'){
             steps {
-                version = sh(
+                sh 'echo ${version}'
+                script {
+                    version = sh(
                     script: "git describe --tags | cut -c 1-4",
                     returnStdout: true,
-                  )        
+                  ) 
+                }                       
                 sh 'echo ${version}'
             }
         }
